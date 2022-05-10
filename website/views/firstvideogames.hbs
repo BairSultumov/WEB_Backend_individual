@@ -1,11 +1,12 @@
-<form name="tableForm" action="/MainUserTable">
-    <input type="text" name="name" placeholder="Наименование">
-    <input type="text" name="description" placeholder="Описание">
-    <input type="submit" value="Отправить" name="postButton">
+
+<form id="tableForm" name="tableForm" action="/postTable">
+    <input type="text" id="name" name="name" placeholder="Наименование">
+    <input type="text" id="description" name="description" placeholder="Описание">
+    <input type="submit" value="Отправить" name="postButton" id="postButton">
 </form>
 
 <table id="userTable">
-    <tr class="boldHere">
+    <tr>
         <td>Наименование</td>
         <td>Описание</td>
     </tr>
@@ -17,48 +18,18 @@
     {{/each}}
 </table>
 
-<script>
-    var form = document.forms.tableForm;
-    form.postButton.addEventListener("click", (event) => {
-        event.preventDefault();
-        var formData = new FormData(form);
-        var request = new XMLHttpRequest();
-        request.open("POST", "MainUserTable", false);
-        request.onreadystatechange = () => {
-            if (request.readyState == 4 && request.status == 200) {
-                //document.getElementsByTagName("h3")[0].innerText=request.responseText;  //текст ответа сервера
-                //document.cookie = "user=" + request.responseText;
-                document.getElementById("userTable").appendChild=request.responseText;
-            }
-        }
-        request.send(formData);
-        location.reload();
-    }); 
-</script>
+<script src="https://yastatic.net/jquery/3.3.1/jquery.min.js"></script>
 
-<form name="userForm" action="getData">
-    <input placeholder="Логин" name="log" type="text"><br>
-    <input placeholder="Пароль" name="pas" type="password"><br>
-    <input type="submit" value="Вход" name="postButton">
-</form>
 <script>
-    var form = document.forms.userForm;
-    form.postButton.addEventListener("click", (event) => {
-        event.preventDefault();
-        var formData = new FormData(form);
-        var request = new XMLHttpRequest();
-        request.open("POST", form.action, false);
-        request.onreadystatechange = () => {
-            if (request.readyState == 4 && request.status == 200) {
-                //document.getElementsByTagName("h3")[0].innerText=request.responseText;  //текст ответа сервера
-                document.cookie = "user=" + request.responseText;
-            }
-        }
-        request.send(formData);
-        form.log.value = "";
-        form.pas.value = "";
-        location.reload();
-    }); 
+    $("#tableForm").submit(function (event) {
+    event.preventDefault();
+    $("#postButton").click(function () {
+        alert("Данные отправлены!")
+      $.post('postTable', { 'name': $('#name').val(),'description': $('#description').val()},
+          function (data) { $('#userTable').append(data); } 
+      );
+    });
+  });
 </script>
 
 

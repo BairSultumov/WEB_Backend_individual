@@ -12,6 +12,32 @@
 </head>
 
 <body class="body_shablon">
+    <div class="loginForm">
+        <form name="userForm" action="getData">
+            <input placeholder="Логин" name="log" type="text"><br>
+            <input placeholder="Пароль" name="pas" type="password"><br>
+            <input type="submit" value="Вход" name="postButton">
+        </form>
+        <script>
+            var form = document.forms.userForm;
+            form.postButton.addEventListener("click", (event) => {
+                event.preventDefault();
+                var formData = new FormData(form);
+                var request = new XMLHttpRequest();
+                request.open("POST", form.action, false);
+                request.onreadystatechange = () => {
+                    if (request.readyState == 4 && request.status == 200) {
+                        //document.getElementsByTagName("h3")[0].innerText=request.responseText;  //текст ответа сервера
+                        document.cookie = "user=" + request.responseText;
+                    }
+                }
+                request.send(formData);
+                form.log.value = "";
+                form.pas.value = "";
+                location.reload();
+            }); 
+        </script>
+    </div>
     {{>header}}
     {{>menu}}
     <div class="content">
