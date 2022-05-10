@@ -16,27 +16,8 @@
     {{>menu}}
     <div class="content">
         <section class="Section">
-
             <div class="contact"></div>
             <script src="8.2.js"></script>
-            <form action="/MainUserTable" method="post">
-                <input type="text" name="name" placeholder="Наименование">
-                <input type="text" name="description" placeholder="Описание">
-                <input type="submit" value="Отправить">
-            </form>
-
-            <table id="userTable">
-                <tr class="boldHere">
-                    <td>Наименование</td>
-                    <td>Описание</td>
-                </tr>
-                {{#each components}}
-                <tr>
-                    <td>{{this.name}}</td>
-                    <td>{{this.description}}</td>
-                </tr>
-                {{/each}}
-            </table>
             <div class="entry-content">
                 {{{body}}}
             </div>

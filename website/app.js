@@ -36,7 +36,7 @@ app.get("/fightings",urlencodedParser,function(request,response){
   response.render("fightings");
 });
 app.get("/firstvideogames",urlencodedParser,function(request,response){
-  response.render("firstvideogames");
+  response.render("firstvideogames",{components: arr});
 });
 
 app.get("/",urlencodedParser,function(request,response){
