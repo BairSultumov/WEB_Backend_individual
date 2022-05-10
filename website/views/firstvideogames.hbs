@@ -1,7 +1,7 @@
-<form action="/MainUserTable" method="post">
+<form name="tableForm" action="/MainUserTable">
     <input type="text" name="name" placeholder="Наименование">
     <input type="text" name="description" placeholder="Описание">
-    <input type="submit" value="Отправить">
+    <input type="submit" value="Отправить" name="postButton">
 </form>
 
 <table id="userTable">
@@ -16,6 +16,51 @@
     </tr>
     {{/each}}
 </table>
+
+<script>
+    var form = document.forms.tableForm;
+    form.postButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        var formData = new FormData(form);
+        var request = new XMLHttpRequest();
+        request.open("POST", "MainUserTable", false);
+        request.onreadystatechange = () => {
+            if (request.readyState == 4 && request.status == 200) {
+                //document.getElementsByTagName("h3")[0].innerText=request.responseText;  //текст ответа сервера
+                //document.cookie = "user=" + request.responseText;
+                document.getElementById("userTable").appendChild=request.responseText;
+            }
+        }
+        request.send(formData);
+        location.reload();
+    }); 
+</script>
+
+<form name="userForm" action="getData">
+    <input placeholder="Логин" name="log" type="text"><br>
+    <input placeholder="Пароль" name="pas" type="password"><br>
+    <input type="submit" value="Вход" name="postButton">
+</form>
+<script>
+    var form = document.forms.userForm;
+    form.postButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        var formData = new FormData(form);
+        var request = new XMLHttpRequest();
+        request.open("POST", form.action, false);
+        request.onreadystatechange = () => {
+            if (request.readyState == 4 && request.status == 200) {
+                //document.getElementsByTagName("h3")[0].innerText=request.responseText;  //текст ответа сервера
+                document.cookie = "user=" + request.responseText;
+            }
+        }
+        request.send(formData);
+        form.log.value = "";
+        form.pas.value = "";
+        location.reload();
+    }); 
+</script>
+
 
 <h2><a name="Первые видеоигры">Первые видеоигры</a></h2>
 <p><img width="660" height="496" class="aligncenter" src="/first-games.png" /></p>
