@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Компьютерные игры по жанрам</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="/website/script.js"></script>
+</head>
+
+<body class="body_shablon">
+    {{>header}}
+    {{>menu}}
+    <div class="content">
+        <section class="Section">
+
+            <div class="contact"></div>
+            <script src="8.2.js"></script>
+            <form action="/MainUserTable" method="post">
+                <input type="text" name="name" placeholder="Наименование">
+                <input type="text" name="description" placeholder="Описание">
+                <input type="submit" value="Отправить">
+            </form>
+
+            <table id="userTable">
+                <tr class="boldHere">
+                    <td>Наименование</td>
+                    <td>Описание</td>
+                </tr>
+                {{#each components}}
+                <tr>
+                    <td>{{this.name}}</td>
+                    <td>{{this.description}}</td>
+                </tr>
+                {{/each}}
+            </table>
+            <div class="entry-content">
+                {{{body}}}
+            </div>
+        </section>
+    </div>
+
+    {{>footer}}
+</body>
+
+</html>
