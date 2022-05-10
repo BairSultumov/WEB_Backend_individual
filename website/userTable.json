@@ -1,1 +1,10 @@
-[{"name":"asdg","description":"asdg"},{"name":"124","description":"124"},{"name":"asf","description":"ag"},{"name":"Адиса","description":"123123"},{"name":"Адиса","description":"йц"}]
+[
+    {
+        "name": "asdg",
+        "description": "asdg"
+    },
+    {
+        "name": "124",
+        "description": "124"
+    }
+]
